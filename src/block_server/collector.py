@@ -3,9 +3,11 @@ from datetime import datetime
 from block_core.blocked import Blocked
 import threading
 
+
 class Collector(threading.Thread):
 
     def __init__(self, cache):
+        threading.Thread.__init__(self)
         # Create a TCP/IP socket for receiving data
         RCV_UDP_IP = ''
         RCV_UDP_PORT = 5140
