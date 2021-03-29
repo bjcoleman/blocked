@@ -1,5 +1,5 @@
 
-from flask import Flask
+from flask import Flask, jsonify
 from datetime import datetime
 from block_core.blocked import blocked_to_json
 from block_server.data_cache import DataCache
@@ -15,7 +15,7 @@ def create_app(cache):
         current = cache.get_all_since(datetime(2020, 1, 1, 0, 0, 0))
 
         items = [blocked_to_json(blocked) for blocked in current]
-        return items
+        return jsonify(items)
 
     return app
 
