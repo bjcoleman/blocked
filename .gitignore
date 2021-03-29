@@ -1,4 +1,8 @@
 .env
 .venv/
 .idea/
+*egg-info/
 .DS_Store
+GeoLite*
+__pycache__
+
