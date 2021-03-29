@@ -3,14 +3,12 @@ from flask import Flask
 from datetime import datetime
 from block_core.blocked import blocked_to_json
 from block_server.data_cache import DataCache
-from block_server.collector import collect
-import threading
+from block_server.collector import Collector
 
 
 def create_app(cache):
 
     app = Flask(__name__)
-
 
     @app.route('/')
     def get():
@@ -25,8 +23,8 @@ def create_app(cache):
 def go():
     cache = DataCache()
     app = create_app(cache)
-    t = threading.Thread(target=collect(), args=(cache))
-    t.start()
+    collector = Collector(cache)
+    collector.start()
     app.run(host='0.0.0.0', port=5000)
 
 

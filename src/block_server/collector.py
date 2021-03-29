@@ -1,9 +1,9 @@
 import socket
 from datetime import datetime
 from block_core.blocked import Blocked
+import threading
 
-
-class Collector:
+class Collector(threading.Thread):
 
     def __init__(self, cache):
         # Create a TCP/IP socket for receiving data
@@ -26,7 +26,3 @@ class Collector:
 
             timestamp = datetime.strptime(time_str, '%Y/%m/%d %H:%M:%S')
             self.cache.add(Blocked(timestamp, ip, protocol))
-
-
-def collect(cache):
-    Collector(cache).go()
