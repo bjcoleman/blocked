@@ -12,7 +12,7 @@ def create_app(cache):
 
     @app.route('/')
     def get():
-        timestamp_str = request.form['timestamp']
+        timestamp_str = request.args.get('timestamp')
         if timestamp_str is None:
             return "['error': 'provide timestemp']", 400
 

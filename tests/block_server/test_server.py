@@ -20,7 +20,7 @@ def test_no_data():
     client = app.test_client()
 
     params = {'timestamp': 0}
-    result = client.get(data=params)
+    result = client.get(query_string=params)
 
     assert result.status_code == 200
     assert result.get_json() == []
@@ -36,7 +36,7 @@ def test_all_data():
     client = app.test_client()
 
     params = {'timestamp': 0}
-    result = client.get(data=params)
+    result = client.get(query_string=params)
 
     assert result.status_code == 200
     assert len(result.get_json()) == 2
@@ -52,7 +52,7 @@ def test_subset_of_data():
     client = app.test_client()
 
     params = {'timestamp': datetime.datetime(2021, 1, 2, 0, 15, 36).timestamp()}
-    result = client.get(data=params)
+    result = client.get(query_string=params)
 
     assert result.status_code == 200
     assert len(result.get_json()) == 1
@@ -64,6 +64,6 @@ def test_bad_timestamp():
     client = app.test_client()
 
     params = {'timestamp': 'hello'}
-    result = client.get(data=params)
+    result = client.get(query_string=params)
 
     assert result.status_code == 400
