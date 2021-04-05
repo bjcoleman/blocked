@@ -14,7 +14,7 @@ def blocked_to_dict(blocked):
 
 
 def blocked_to_json(blocked):
-    timestamp = blocked.timestamp.strftime('%Y/%m/%d %H:%M:%S')
+    timestamp = blocked.timestamp.strftime('%Y/%m/%d %H:%M:%S.%f')
     ret = {'timestamp': timestamp,
            'ip': blocked.ip,
            'protocol': blocked.protocol}
@@ -23,6 +23,6 @@ def blocked_to_json(blocked):
 
 def json_to_blocked(json_str):
     param = json.loads(json_str)
-    return Blocked(datetime.datetime.strptime(param['timestamp'], '%Y/%m/%d %H:%M:%S'),
+    return Blocked(datetime.datetime.strptime(param['timestamp'], '%Y/%m/%d %H:%M:%S.%f'),
                    param['ip'],
                    param['protocol'])
