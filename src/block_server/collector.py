@@ -17,7 +17,7 @@ class Collector(threading.Thread):
         self.rcv_sock.bind((RCV_UDP_IP, RCV_UDP_PORT))
         self.cache = cache
 
-    def go(self):
+    def run(self):
 
         while True:
             # Receive message
