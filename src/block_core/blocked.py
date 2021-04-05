@@ -7,7 +7,7 @@ Blocked = namedtuple('Blocked', ['timestamp', 'ip', 'protocol'])
 
 
 def blocked_to_dict(blocked):
-    timestamp = blocked.timestamp.strftime('%Y/%m/%d %H:%M:%S')
+    timestamp = blocked.timestamp.strftime('%Y/%m/%d %H:%M:%S.%f')
     return {'timestamp': timestamp,
             'ip': blocked.ip,
             'protocol': blocked.protocol}
