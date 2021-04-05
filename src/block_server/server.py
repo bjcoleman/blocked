@@ -1,5 +1,5 @@
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from datetime import datetime
 from block_core.blocked import blocked_to_dict
 from block_server.data_cache import DataCache
@@ -12,7 +12,16 @@ def create_app(cache):
 
     @app.route('/')
     def get():
-        current = cache.get_all_since(datetime(2020, 1, 1, 0, 0, 0))
+        timestamp_str = request.form['timestamp']
+        if timestamp_str is None:
+            return "['error': 'provide timestemp']", 400
+
+        try:
+            timestamp = datetime.fromtimestamp(float(timestamp_str))
+        except ValueError:
+            return "['error': 'timestamp must be a float']", 400
+
+        current = cache.get_all_since(timestamp)
 
         items = [blocked_to_dict(blocked) for blocked in current]
         return jsonify(items)

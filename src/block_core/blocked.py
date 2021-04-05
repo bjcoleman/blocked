@@ -5,6 +5,7 @@ import datetime
 
 Blocked = namedtuple('Blocked', ['timestamp', 'ip', 'protocol'])
 
+
 def blocked_to_dict(blocked):
     timestamp = blocked.timestamp.strftime('%Y/%m/%d %H:%M:%S')
     return {'timestamp': timestamp,
